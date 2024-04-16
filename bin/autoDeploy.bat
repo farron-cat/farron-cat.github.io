@@ -1,5 +1,5 @@
 call pnpm docs:build
-cd docs/.viterpress/dist
+cd docs/.vitepress/dist
 
 git init
 git add -A
