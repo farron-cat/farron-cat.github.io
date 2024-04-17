@@ -3,23 +3,32 @@
 layout: home
 
 hero:
-  name: "farron cat's blog"
-  text: "a personal blog"
-  tagline: My great project tagline
+  name: "farron cat's Blog"
+  text: "collect all interests"
+  tagline: ""
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Programming
+      link: /programming/
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Game Development
+      link: /game development/
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  
+  - icon: 👩‍💻
+    title: Programming
+    details: 编程相关内容
+    link: /programming/
+    linkText: open
+  - icon: 🎮
+    title: Game Development
+    details: 游戏开发相关内容<br />包括脚本，引擎，图形API
+    link: /game development/
+    linkText: open
+  - icon: 🎈
+    title: Other
+    details: 
+    
 ---
 
