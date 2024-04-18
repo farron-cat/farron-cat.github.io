@@ -1,5 +1,5 @@
 # programing
 
-## C++
+## [C++](./cpp/index.md)
 
-## data structure
+## [data structure](./data_structure/index.md)

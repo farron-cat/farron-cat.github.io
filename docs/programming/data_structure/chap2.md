@@ -443,45 +443,263 @@ int Length(LinkList L)
 
 
 ### <font color=#40A8F5>双链表</font>
-- 定义 ![图片](./第二章 线性表-幕布图片-77486-142298.jpg)
-- 初始化 ![图片](./第二章 线性表-幕布图片-596077-728859.jpg)
-- 插入（后插） ![图片](./第二章 线性表-幕布图片-25215-89511.jpg)
-    - 前插是前驱节点的后插
-- 删除（后删） ![图片](./第二章 线性表-幕布图片-658232-305355.jpg)
-- 遍历 ![图片](./第二章 线性表-幕布图片-806400-821173.jpg)
+定义:
+```c
+typedef int ElemType;
+typedef struct DNode
+{
+    ElemType e;
+    struct DNode *prior, *next;
+} DNode, *DLinkList;
+```
+
+初始化:
+```c
+bool InitDLinkList(DLinkList &L)
+{
+    L = (DNode *)malloc(sizeof(DNode));
+    if (L == NULL)
+        return false;
+    L->prior = NULL;
+    L->next = NULL;
+    return true;
+}
+```
+
+插入（后插）:
+```c
+//指定结点后插 注意边界情况：p结点为尾结点
+bool InsertNextDNode(DNode *p, DNode *s)
+{
+    if (p == NULL || s == NULL)
+        return false;
+    s->next = p->next;
+    //p不是尾结点
+    if (p->next != NULL)
+        p->next->prior = s;
+    s->prior = p;
+    p->next = s;
+    return true;
+}
+```
+- 前插是前驱节点的后插
+
+删除（后删）:
+```c
+//删除指定结点后继结点 注意边界情况：删除结点为尾结点
+bool DeleteNextDNode(DNode *p)
+{
+    if (p == NULL)
+        return false;
+    DNode *q = p->next;
+    //p是尾结点 q为空 删除失败
+    if (q == NULL)
+        return false;
+    p->next = q->next;
+    //q不是尾结点 进行前向指针操作 
+    if (q != NULL)
+        q->next->prior = p;
+    free(q);
+}
+```
+
+遍历:
+```c
+//后向遍历
+while(p!=NULL){  //条件改为 p->next!=NULL 则跳过尾节点
+    do something
+    p=p->next;
+}
+
+//前向遍历
+while(p!=NULL){  //条件改为 p->prior!=NULL 则跳过头节点
+    do something
+    p=p->prior;
+}
+```
 - 双链表插入和删除p时，要考虑p是否为尾节点
 
 ### <font color=#40A8F5>循环链表</font>
-- <font color=#40A8F5>循环单链表</font>
-    - 经常在头尾操作时，L指向尾结点较好，L指向尾节点时找到头节点的时间复杂度为O(1)
-    - 定义 ![图片](./第二章 线性表-幕布图片-599180-355193.jpg)
-    - 初始化（带头） ![图片](./第二章 线性表-幕布图片-734972-435118.jpg)
-    - 判空 ![图片](./第二章 线性表-幕布图片-594820-264401.jpg)
-    - 判尾 ![图片](./第二章 线性表-幕布图片-62123-474577.jpg)
-- <font color=#40A8F5>循环双链表</font>
-    - 定义 ![图片](./第二章 线性表-幕布图片-190631-590164.jpg)
-    - 初始化 ![图片](./第二章 线性表-幕布图片-217636-425089.jpg)
-    - 判空 ![图片](./第二章 线性表-幕布图片-74516-769182.jpg)
-    - 判尾 ![图片](./第二章 线性表-幕布图片-281049-951546.jpg)
-    - 指定结点后插 ![图片](./第二章 线性表-幕布图片-938877-900400.jpg)
-    - 删除指定结点 ![图片](./第二章 线性表-幕布图片-844792-153579.jpg)
-    - 循环双链表无须考虑p为尾节点的插入删除问题
+#### <font color=#40A8F5>循环单链表</font>
+经常在头尾操作时，L指向尾结点较好，L指向尾节点时找到头节点的时间复杂度为O(1)
+定义:
+```c
+typedef struct LNode
+{
+    ElemType data;
+    struct LNode *next;
+} LNode, *CLinkList;
+```
+
+初始化（带头）: 
+```c
+//带头 初始化
+bool InitList(CLinkList &L)
+{
+    L = (LNode *)malloc(sizeof(LNode));
+    if (L == NULL)
+        return false;
+    L->next = L; //指向头结点
+    return true;
+}
+```
+
+判空:
+```c
+//判空
+bool Empty(CLinkList L)
+{
+    if (L->next == L)
+        return true;
+    else
+        return false;
+}
+```
+
+判尾:
+```c
+//判尾
+bool isTail(CLinkList L, LNode *p)
+{
+    if (p->next == L)
+        return true;
+    else
+        return false;
+}
+```
+
+#### <font color=#40A8F5>循环双链表</font>
+定义:
+```c
+typedef struct DNode
+{
+    ElemType e;
+    struct DNode *prior, *next;
+} DNode, *CDLinkList;
+```
+
+初始化: 
+```c
+//初始化
+bool InitDLinkList(CDLinkList &L)
+{
+    L = (DNode *)malloc(sizeof(DNode));
+    if (L == NULL)
+        return false;
+    L->prior = L;
+    L->next = L;
+    return true;
+}
+```
+
+判空:
+```c
+//判空
+bool Empty(CDLinkList L)
+{
+    if (L->next == L)
+        return true;
+    else
+        return false;
+}
+```
+
+判尾:
+```c
+//判尾
+bool isTail(CDLinkList L, DNode *p)
+{
+    if (p->next == L)
+        return true;
+    else
+        return false;
+}
+```
+
+指定结点后插:
+```c
+//指定结点后插
+//因为是循环链表 所以不会出现双链表尾结点插入的特殊情况
+bool InsertNextDNode(DNode *p, DNode *s)
+{
+    if (p == NULL || s == NULL)
+        return false;
+    s->next = p->next;
+    p->next->prior = s;
+    s->prior = p;
+    p->next = s;
+    return true;
+}
+```
+
+删除指定结点:
+```c
+//删除指定结点后继结点
+//因为是循环链表 所以不会出现双链表删除尾结点的特殊情况
+bool DeleteNextDNode(DNode *p)
+{
+    if (p == NULL)
+        return false;
+    DNode *q = p->next;
+    if (q == NULL)
+        return false;
+    
+    p->next = q->next;
+    q->next->prior = p;
+    free(q);
+}
+```
+
+- 循环双链表无须考虑p为尾节点的插入删除问题
 - 边界细节
     - 判空
     - 判断表头、表尾
     - 如何在表中、表头、表尾插入和删除节点
 
 ### <font color=#40A8F5>静态链表</font>
-- 定义
-    - 定义1 ![图片](./第二章 线性表-幕布图片-757826-433848.jpg)
-    - 定义2 ![图片](./第二章 线性表-幕布图片-781090-200450.jpg)
-    - next==-1为尾
-    - next==-1为空
-    - <font color=#DC2D1E>操作</font>
-        - 插入和删除 ![图片](./第二章 线性表-幕布图片-301576-300431.jpg)
+定义:
+
+定义1
+```c
+//定义1
+#define MaxSize 10
+typedef struct
+{
+    ElemType e;
+    int next;
+}Node;
+//使用：Node l[MaxSize];
+```
+定义2
+```c
+//定义2
+#define MaxSize 10
+typedef struct
+{
+    ElemType e;
+    int next;
+}SLinkList[MaxSize];
+/* 上述代码等价形式
+#define MaxSize 10
+typedef struct Node
+{
+    ElemType e;
+    int next;
+};
+typedef struct Node SLinkList[MaxSize];
+*/
+//使用：SLinkList l;
+```
+
+- next==-1为尾
+- next==-1为空
+
+插入和删除:
+```c
+```
 
 ## <font color=#DC2D1E>顺序表和链表的对比</font>
 - 思路：
     - 定义
     - 同与不同
-    - 从基本操作 创销 增删查改 思考区别 ![图片](./第二章 线性表-幕布图片-402343-481195.jpg) ![图片](./第二章 线性表-幕布图片-612626-551236.jpg)
+    - 从基本操作 创销 增删查改 思考区别
