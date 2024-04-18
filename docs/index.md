@@ -12,7 +12,7 @@ hero:
       link: /programming/
     - theme: alt
       text: Game Development
-      link: /game development/
+      link: /game_development/
 
 features:
   
@@ -24,7 +24,7 @@ features:
   - icon: 🎮
     title: Game Development
     details: 游戏开发相关内容<br />包括脚本，引擎，图形API
-    link: /game development/
+    link: /game_development/
     linkText: open
   - icon: 🎈
     title: Other
