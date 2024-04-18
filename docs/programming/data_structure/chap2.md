@@ -1,4 +1,4 @@
-# 第二章 线性表 Linear List
+# 第二章 线性表 (Linear List)
 ## 定义
 - 具有 <font color=#FFAF38>相同数据类</font> <font color=#FFAF38>型</font> 的n个数据元素的 <font color=#40A8F5>有限</font> <font color=#DC2D1E>序列</font> (有次序)
     - n为表长 n=0时为空表
@@ -9,8 +9,9 @@
 ## <font color=#DC2D1E>顺序表</font>
 **用顺序存储的方式实现的线性表** 
 
+### 定义:
 静态分配
-```c
+```c:line-numbers
 #define MaxSize 10
 typedef int ElemType;
 typedef struct
@@ -20,7 +21,7 @@ typedef struct
 } SqList;
 ```
 动态分配
-```c
+```c:line-numbers
 #define InitSize 10
 typedef int ElemType;
 typedef struct
@@ -31,7 +32,7 @@ typedef struct
 } SqList;
 ```
 动态分配的扩容 
-```c
+```c:line-numbers
 void IncreaseSize(SqList &L, int len)
 {
     int *p = L.data;
@@ -43,10 +44,10 @@ void IncreaseSize(SqList &L, int len)
 }
 ```
 
-**基本操作: (静态)**
+### 基本操作: (静态)
 
-初始化:
-```c
+1.初始化:
+```c:line-numbers
 void InitList(SqList &L)
 {
     for (int i = 0; i < MaxSize; i++)
@@ -55,8 +56,8 @@ void InitList(SqList &L)
 }
 ```
 
-插入:
-```c
+2.插入:
+```c:line-numbers
 bool ListInsert(SqList &L, int i, ElemType e)
 {
     if (i < 1 || i > L.length + 1)
@@ -70,15 +71,17 @@ bool ListInsert(SqList &L, int i, ElemType e)
     return true;
 }
 ```
+::: tip
 - i是位序，它范围是从1~length，插入位置其实为数组的i-1位置，j应从length~i，保证最后一次将插入位置i-1的内容移动到i处(即j>=i）
 - 分析
     - 最好：O(1)
     - 最坏：O(n)
     - 平均：O(n)
         - (n+n-1+n-2+...+0)*(1/(n+1))
+:::
 
-删除:
-```c
+3.删除:
+```c:line-numbers
 bool ListDelete(SqList &L, int i, ElemType &e)
 {
     if (i < 1 || i > L.length + 1)
@@ -90,6 +93,7 @@ bool ListDelete(SqList &L, int i, ElemType &e)
     return true;
 }
 ```
+::: tip
 - i合法位置为1~length
 - 删除位序i，实际上删除数组i-1处元素，j从i~length-1，将j处移到j-1处
 - 分析
@@ -97,11 +101,12 @@ bool ListDelete(SqList &L, int i, ElemType &e)
     - 最坏：O(n)
     - 平均：O(n)
         - (n-1+n-2+...+0)*(1/(n))
+:::
 
-查找:
+4.查找:
 
 按位查找
-```c
+```c:line-numbers
 ElemType GetElem(SqList L, int i)
 {
     if (i < 1 || i > L.length)
@@ -109,13 +114,15 @@ ElemType GetElem(SqList L, int i)
     return L.data[i - 1];
 }
 ```
+::: tip
 - 分析
     - 最好：O(1)
     - 最坏：O(1)
     - 平均：O(1)
+:::
 
 按值查找
-```c
+```c:line-numbers
 int LocateElem(SqList L, ElemType e)
 {
     for (int i = 0; i < L.length; i++)
@@ -124,25 +131,25 @@ int LocateElem(SqList L, ElemType e)
     return 0;
 }
 ```
+::: tip
 - 分析
     - 最好：O(1)
     - 最坏：O(n)
     - 平均：O(n)
-
-
-**特点**
-- 随机访问
-- 存储密度高
-- 扩展容量不方便
-- 插入删除数据不方便
+- 特点
+    - 随机访问
+    - 存储密度高
+    - 扩展容量不方便
+    - 插入删除数据不方便
+:::
 
 
 ## <font color=#DC2D1E>链表</font>
 用<font color=#DC2D1E>链式存储</font>的方式实现线性表
 
 ### <font color=#40A8F5>单链表</font>
-1.定义
-```c
+#### 1.定义
+```c:line-numbers
 typedef int ElemType;
 typedef struct LNode
 {
@@ -151,10 +158,10 @@ typedef struct LNode
 } LNode, *LinkList;
 ```
 
-2.初始化:
+#### 2.初始化:
 
-带头  判空条件:L->next == NULL
-```c
+带头
+```c:line-numbers
 bool InitList(LinkList &L)
 {
     L = (LNode *)malloc(sizeof(LNode));
@@ -164,18 +171,24 @@ bool InitList(LinkList &L)
     return true;
 }
 ```
-不带头 判空条件:L==NULL 
-```c
+:::tip
+判空条件:L->next == NULL
+:::
+不带头  
+```c:line-numbers
 bool InitList(LinkList &L)
 {
     L = NULL;
     return true;
 }
 ```
-3.插入:
+:::tip
+判空条件:L==NULL
+:::
+#### 3.插入:
 
 指定结点后插 
-```c
+```c:line-numbers
 //指定结点后插 O(1)
 bool InsertNextNode(LNode *p, ElemType e)
 {
@@ -194,7 +207,7 @@ bool InsertNextNode(LNode *p, ElemType e)
 ```
 <font color=#40A8F5>指定结点前插</font> 
 
-```c
+```c:line-numbers
 //指定结点前插 O(1)
 bool InsertPriorNode(LNode *p, ElemType e)
 {
@@ -213,11 +226,14 @@ bool InsertPriorNode(LNode *p, ElemType e)
     return true;
 }
 ```
+:::details
 - 先将新建节点插入p之后，将p节点值赋给新节点，再将e赋给p节点，从而实现逻辑上的前插
+:::
+
 
 指定位序插入  （可以复用结点插入函数）
 带头结点 
-```c
+```c:line-numbers
 //带头 指定位序插入
 bool ListInsert(LinkList &L, int i, ElemType e)
 {
@@ -238,11 +254,14 @@ bool ListInsert(LinkList &L, int i, ElemType e)
     return InsertNextNode(p, e);
 }
 ```
+:::tip
 - 头节点位序为0，在位序i处插入，实际上是在第i-1个节点处后插
 - p==NULL说明插入位置i>链表长度+1
+:::
+
 
 不带头结点 
-```c
+```c:line-numbers
 //不带头 指定位序插入
 bool ListInsert(LinkList &L, int i, ElemType e){
     if (i < 1)
@@ -268,13 +287,17 @@ bool ListInsert(LinkList &L, int i, ElemType e){
     return InsertNextNode(p,e);
 }
 ```
+:::tip
 - 对i==1特殊处理（i==1时头指针指向会改变）
+:::
 
-4.建立:
+
+#### 4.建立:
 
 核心：链表初始化、指定结点后插
+
 尾插法建立
-```c
+```c:line-numbers
 //带头 尾插建立 O(n)
 LinkList List_TailInsert(LinkList &L)
 {
@@ -295,10 +318,13 @@ LinkList List_TailInsert(LinkList &L)
     return L;
 }
 ```
+:::details
 - 先初始化头节点，用rear指针记录最后节点位置，然后创建新节点并将新节点插入rear之后，更新rear位置
+:::
+
 
 头插法建立 
-```c
+```c:line-numbers
 //带头 头插建立（可以实现链表逆置）
 LinkList List_HeadInsert(LinkList &L)
 {
@@ -318,14 +344,17 @@ LinkList List_HeadInsert(LinkList &L)
     return L;
 }
 ```
+:::tip
 - 每次都在头节点后插入
 - 头插最后与输入反序
+:::
 
 
-5.删除:
+
+#### 5.删除:
 
 删除指定位序
-```c
+```c:line-numbers
 //带头 删除指定位序 O(n)
 bool ListDelete(LinkList &L, int i, ElemType &e)
 {
@@ -353,10 +382,13 @@ bool ListDelete(LinkList &L, int i, ElemType &e)
     return true;
 }
 ```
+:::tip
 - 删除i处，要在i-1处操作
+:::
+
 
 删除指定节点
-```c
+```c:line-numbers
 //带头 删除指定结点 O(1) 指定结点p不能为尾结点
 bool DeleteNode(LNode *p)
 {
@@ -373,14 +405,17 @@ bool DeleteNode(LNode *p)
     return true;
 }
 ```
+:::details
 - 通过将p后继节点值赋给p并删除p的后继来实现
 - 要删除尾节点需要知道头指针，从头到尾遍历确定尾节点的前驱节点位置，然后再删除尾节点
+:::
 
 
-6.查找:
+
+#### 6.查找:
 
 按值查找
-```c
+```c:line-numbers
 //带头 按值查找 O(n)
 LNode *LocateElem(LinkList L, ElemType e)
 {
@@ -393,7 +428,7 @@ LNode *LocateElem(LinkList L, ElemType e)
 }
 ```
 按位序查找
-```c
+```c:line-numbers
 //带头 按位序查找 O(n)
 LNode *GetElem(LinkList &L, int i)
 {
@@ -411,14 +446,17 @@ LNode *GetElem(LinkList &L, int i)
     return p;
 }
 ```
+:::tip
 - 循环结束时j=i
-- 没写完，少返回p
+- ????没写完，少返回p
+:::
 
 
-7.常用操作:
+
+#### 7.常用操作:
 
 求表长
-```c
+```c:line-numbers
 //带头 求表长
 int Length(LinkList L)
 {
@@ -433,18 +471,26 @@ int Length(LinkList L)
 }
 ```
 求倒数第k个节点的值
+:::details
 - 用双指针，快指针比慢指针多走k个（慢加k等于快），同时走，快指针到末尾时慢指针位置即为所求
+:::
 
 单链表就地逆置
+:::details
+
+:::
 
 反向输出单链表的值
+:::details
 - 递归
 - 辅助栈
+:::
+
 
 
 ### <font color=#40A8F5>双链表</font>
-定义:
-```c
+#### 1.定义:
+```c:line-numbers
 typedef int ElemType;
 typedef struct DNode
 {
@@ -453,8 +499,8 @@ typedef struct DNode
 } DNode, *DLinkList;
 ```
 
-初始化:
-```c
+#### 2.初始化:
+```c:line-numbers
 bool InitDLinkList(DLinkList &L)
 {
     L = (DNode *)malloc(sizeof(DNode));
@@ -466,8 +512,8 @@ bool InitDLinkList(DLinkList &L)
 }
 ```
 
-插入（后插）:
-```c
+#### 3.插入（后插）:
+```c:line-numbers
 //指定结点后插 注意边界情况：p结点为尾结点
 bool InsertNextDNode(DNode *p, DNode *s)
 {
@@ -482,10 +528,13 @@ bool InsertNextDNode(DNode *p, DNode *s)
     return true;
 }
 ```
+:::tip
 - 前插是前驱节点的后插
+:::
 
-删除（后删）:
-```c
+
+#### 4.删除（后删）:
+```c:line-numbers
 //删除指定结点后继结点 注意边界情况：删除结点为尾结点
 bool DeleteNextDNode(DNode *p)
 {
@@ -503,8 +552,8 @@ bool DeleteNextDNode(DNode *p)
 }
 ```
 
-遍历:
-```c
+#### 5.遍历:
+```c:line-numbers
 //后向遍历
 while(p!=NULL){  //条件改为 p->next!=NULL 则跳过尾节点
     do something
@@ -517,13 +566,16 @@ while(p!=NULL){  //条件改为 p->prior!=NULL 则跳过头节点
     p=p->prior;
 }
 ```
+:::tip
 - 双链表插入和删除p时，要考虑p是否为尾节点
+:::
+
 
 ### <font color=#40A8F5>循环链表</font>
 #### <font color=#40A8F5>循环单链表</font>
 经常在头尾操作时，L指向尾结点较好，L指向尾节点时找到头节点的时间复杂度为O(1)
-定义:
-```c
+##### 1.定义:
+```c:line-numbers
 typedef struct LNode
 {
     ElemType data;
@@ -531,8 +583,8 @@ typedef struct LNode
 } LNode, *CLinkList;
 ```
 
-初始化（带头）: 
-```c
+##### 2.初始化（带头）: 
+```c:line-numbers
 //带头 初始化
 bool InitList(CLinkList &L)
 {
@@ -544,8 +596,8 @@ bool InitList(CLinkList &L)
 }
 ```
 
-判空:
-```c
+##### 3.判空:
+```c:line-numbers
 //判空
 bool Empty(CLinkList L)
 {
@@ -556,8 +608,8 @@ bool Empty(CLinkList L)
 }
 ```
 
-判尾:
-```c
+##### 4.判尾:
+```c:line-numbers
 //判尾
 bool isTail(CLinkList L, LNode *p)
 {
@@ -569,8 +621,8 @@ bool isTail(CLinkList L, LNode *p)
 ```
 
 #### <font color=#40A8F5>循环双链表</font>
-定义:
-```c
+##### 1.定义:
+```c:line-numbers
 typedef struct DNode
 {
     ElemType e;
@@ -578,8 +630,8 @@ typedef struct DNode
 } DNode, *CDLinkList;
 ```
 
-初始化: 
-```c
+##### 2.初始化: 
+```c:line-numbers
 //初始化
 bool InitDLinkList(CDLinkList &L)
 {
@@ -592,8 +644,8 @@ bool InitDLinkList(CDLinkList &L)
 }
 ```
 
-判空:
-```c
+##### 3.判空:
+```c:line-numbers
 //判空
 bool Empty(CDLinkList L)
 {
@@ -604,8 +656,8 @@ bool Empty(CDLinkList L)
 }
 ```
 
-判尾:
-```c
+##### 4.判尾:
+```c:line-numbers
 //判尾
 bool isTail(CDLinkList L, DNode *p)
 {
@@ -616,8 +668,8 @@ bool isTail(CDLinkList L, DNode *p)
 }
 ```
 
-指定结点后插:
-```c
+##### 5.指定结点后插:
+```c:line-numbers
 //指定结点后插
 //因为是循环链表 所以不会出现双链表尾结点插入的特殊情况
 bool InsertNextDNode(DNode *p, DNode *s)
@@ -632,8 +684,8 @@ bool InsertNextDNode(DNode *p, DNode *s)
 }
 ```
 
-删除指定结点:
-```c
+##### 6.删除指定结点:
+```c:line-numbers
 //删除指定结点后继结点
 //因为是循环链表 所以不会出现双链表删除尾结点的特殊情况
 bool DeleteNextDNode(DNode *p)
@@ -649,18 +701,20 @@ bool DeleteNextDNode(DNode *p)
     free(q);
 }
 ```
-
+:::tip
 - 循环双链表无须考虑p为尾节点的插入删除问题
 - 边界细节
     - 判空
     - 判断表头、表尾
     - 如何在表中、表头、表尾插入和删除节点
+:::
+
 
 ### <font color=#40A8F5>静态链表</font>
-定义:
+#### 1.定义:
 
 定义1
-```c
+```c:line-numbers
 //定义1
 #define MaxSize 10
 typedef struct
@@ -671,7 +725,7 @@ typedef struct
 //使用：Node l[MaxSize];
 ```
 定义2
-```c
+```c:line-numbers
 //定义2
 #define MaxSize 10
 typedef struct
@@ -690,16 +744,20 @@ typedef struct Node SLinkList[MaxSize];
 */
 //使用：SLinkList l;
 ```
-
+:::tip
 - next==-1为尾
 - next==-1为空
+:::
 
-插入和删除:
-```c
+
+#### 2.插入和删除:
+```c:line-numbers
+
+
 ```
 
 ## <font color=#DC2D1E>顺序表和链表的对比</font>
-- 思路：
-    - 定义
-    - 同与不同
-    - 从基本操作 创销 增删查改 思考区别
+### 思路：
+- 定义
+- 同与不同
+- 从基本操作 创销 增删查改 思考区别
