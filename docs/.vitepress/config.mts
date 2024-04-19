@@ -54,9 +54,12 @@ export default defineConfig({
       '/game_development/':{
         text: 'Game Development',
         items: [
+          { text: '-----脚本-----' },
           { text: 'lua', link: '/game_development/lua/' },
+          { text: '-----引擎-----' },
           { text: 'love2d', link: '/game_development/love2d/' },
           { text: 'godot', link: '/game_development/godot/' },
+          { text: '----图形API----' },
           { text: 'DX', link: '/game_development/dx/' },
         ]
       },
