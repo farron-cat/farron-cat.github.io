@@ -1,10 +1,10 @@
 # 第三章 栈和队列
 ## 栈
-### 定义
+### 定义:
 - 只允许在一端进行插入或删除操作的 <font color=#DC2D1E>线性表</font>
 - 栈顶 栈底 空栈
 - 后进先出 LIFO
-### 基本操作
+### 基本操作:
 - 创销
     - InitStack(&)
     - DestroyStack(&L)
@@ -15,77 +15,231 @@
     - GetTop(S,&x)
 - 常用
     - StackEmpty(S)
-### 存储结构
+### 存储结构:
 
 #### <font color=#40A8F5>顺序栈</font>
-##### 定义
-```c
-
+##### 定义:
+```c:line-numbers
+//定义
+typedef struct
+{
+    ElemType data[MaxSize];
+    int top;
+} SqStack;
 ```
 - 栈顶指针top两种定义方法影响代码具体实现
     - top指向栈顶元素
     - top指向栈顶的元素的下一个存储单位
-##### 基本操作
+##### 基本操作:
 初始化
-```c
-
+```c:line-numbers
+//初始化
+void InitStack(SqStack &S)
+{
+    for (int i = 0; i < MaxSize; i++)
+        S.data[i] = 0;
+    S.top = -1;
+}
 ```
 入栈
-```c
-
+```c:line-numbers
+//入栈
+bool Push(SqStack &S, ElemType x)
+{
+    if (S.top == MaxSize - 1)
+        return false;
+    S.top = S.top + 1; // 二合一 先加指针再填内容
+    S.data[S.top] = x; // S.data[++S.top]=x;
+    return true;
+}
 ```
 出栈
-```c
-
+```c:line-numbers
+//出栈
+bool Pop(SqStack &S, ElemType &x)
+{
+    if (S.top == -1)
+        return false;
+    x = S.data[S.top]; // 二合一 先弹出内容再减指针
+    S.top = S.top - 1; // x=S.data[S.top--];
+    return true;
+}
 ```
 返回栈顶 
-```c
-
+```c:line-numbers
+//返回栈顶 同出栈无需移动指针
+bool GetTop(SqStack &S, ElemType &x)
+{
+    if (S.top == -1)
+        return false;
+    x = S.data[S.top];
+    return true;
+}
 ```
 判空
-```c
-
+```c:line-numbers
+//判空 栈顶指针指向-1
+bool StackEmpty(SqStack &S)
+{
+    if(S.top == -1)
+        return true;
+    else
+        return false;
+}
 ```
-##### 特点
+##### 特点:
+    null
 #### <font color=#40A8F5>链栈</font>
-##### 定义 ![图片](./第三章 栈和队列-幕布图片-145986-818194.jpg)
+##### 定义
+```c:line-numbers
+//定义
+typedef struct LinkNode
+{
+    ElemType data;
+    LinkNode *next;
+} LinkNode, *LinkStack;
+```
 ##### 基本操作
 初始化
-```c
-
+```c:line-numbers
+//初始化 无头结点表示
+void InitStack(LinkStack &S)
+{
+    S = NULL;
+}
 ```
 入栈  在表头进行
-```c
-
+```c:line-numbers
+//入栈
+bool Push(LinkStack &S, ElemType x)
+{
+    LinkNode *node = (LinkNode *)malloc(sizeof(LinkNode));
+    if (node == NULL)
+        return false;
+    node->data = x;
+    node->next = S->next;
+    S->next = node;
+    return true;
+}
 ```
 出栈  在表头进行
-```c
-
+```c:line-numbers
+//出栈
+bool Pop(LinkStack &S, ElemType &x)
+{
+    if (S == NULL)
+        return false;
+    LinkNode *p;
+    x = S->data;
+    p = S;
+    S->next = p->next;
+    free(p);
+    return true;
+}
 ```
 返回栈顶
-```c
-
+```c:line-numbers
+//返回栈顶 同出栈不需要p指针标记删除结点并free
+bool GetTop(LinkStack &S, ElemType &x)
+{
+    if (S == NULL)
+        return false;
+    x = S->data;
+    return true;
+}
 ```
 判空  指针为空即为空栈
 ##### 特点
+
+
 #### <font color=#40A8F5>共享栈 （特殊顺序栈）</font>
-##### 定义 ![图片](./第三章 栈和队列-幕布图片-338935-14113.jpg)
+##### 定义
+```c:line-numbers
+//定义 左右二栈共享
+typedef struct
+{
+    ElemType data[MaxSize];
+    int left;
+    int right;
+} ShareStack;
+```
 ##### 基本操作
 初始化
-```c
-
+```c:line-numbers
+//初始化
+void InitStack(ShareStack &S)
+{
+    for (int i = 0; i < MaxSize; i++)
+        S.data[i] = 0;
+    S.left = -1;
+    S.right = MaxSize;
+}
 ```
 入栈
-```c
+```c:line-numbers
+//左入栈
+bool LeftPush(ShareStack &S, ElemType x)
+{
+    if (S.left == S.right - 1)
+        return false;
+    S.left = S.left + 1;
+    S.data[S.left] = x;
+    return true;
+}
 
+//右入栈
+bool RightPush(ShareStack &S, ElemType x)
+{
+    if (S.left == S.right - 1)
+        return false;
+    S.right = S.right - 1;
+    S.data[S.right] = x;
+    return true;
+}
 ```
-出栈
-```c
 
+出栈
+```c:line-numbers
+//左出栈
+bool LeftPop(ShareStack &S, ElemType &x)
+{
+    if (S.left == -1)
+        return false;
+    x = S.data[S.left];
+    S.left = S.left - 1;
+    return true;
+}
+
+
+//右出栈
+bool RightPop(ShareStack &S, ElemType &x)
+{
+    if (S.right == MaxSize)
+        return false;
+    x = S.data[S.right];
+    S.right = S.right + 1;
+    return true;
+}
 ```
 返回栈顶
-```c
+```c:line-numbers
+//左返回栈顶
+bool LeftGetTop(ShareStack &S, ElemType &x)
+{
+    if (S.left == -1)
+        return false;
+    x = S.data[S.left];
+    return true;
+}
 
+//右返回栈顶
+bool RightGetTop(ShareStack &S, ElemType &x)
+{
+    if (S.right == MaxSize)
+        return false;
+    x = S.data[S.right];
+    return true;
+}
 ```
 判空
 - 左-1为空
@@ -105,25 +259,57 @@
 ### 存储结构
 #### <font color=#40A8F5>顺序队列</font> <font color=#DC2D1E>(循环队列)</font>
 ##### 定义
-```c
-
+```c:line-numbers
+//定义
+typedef struct
+{
+    ElemType data[MaxSize];
+    int front, rear;
+} SqQueue;
 ```
 ##### 基本操作
 - 初始化
-```c
-
+```c:line-numbers
+//初始化
+void InitQueue(SqQueue &Q)
+{
+    Q.front = Q.rear = 0;
+}
 ```
 - 入队
-```c
-
+```c:line-numbers
+//入队
+bool EnQueue(SqQueue &Q, ElemType x)
+{
+    if ((Q.rear + 1) % MaxSize == Q.front)//队满错误
+        return false;
+    Q.data[Q.rear] = x;
+    Q.rear = (Q.rear + 1) % MaxSize;//循环加一
+    return true;
+}
 ```
 - 出队
-```c
-
+```c:line-numbers
+//出队
+bool DeQueue(SqQueue &Q, ElemType &x)
+{
+    if (Q.front == Q.rear)//队空错误
+        return false;
+    x = Q.data[Q.front];
+    Q.front = (Q.front + 1) % MaxSize;//循环加一
+    return true;
+}
 ```
 - 判空
-```c
-
+```c:line-numbers
+//判空
+bool isEmpty(SqQueue Q)
+{
+    if (Q.front == Q.rear)//首尾重合则队空
+        return true;
+    else
+        return false;
+}
 ```
 ##### 特点
 - 队尾指针rear指向队尾元素后一个位置时
@@ -140,23 +326,72 @@
         - 队满：front==rear && <font color=#40A8F5>tag==1</font>
 - rear队尾指针指向队尾元素时
 #### <font color=#40A8F5>链队列</font>
-##### 定义 ![图片](./第三章 栈和队列-幕布图片-863636-844975.jpg)
+##### 定义
+```c:line-numbers
+//定义
+typedef struct LinkNode
+{
+    ElemType data;
+    struct LinkNode *next;
+} LinkNode;
+
+typedef struct
+{
+    LinkNode *front, *rear;
+} LinkQueue;
+```
 ##### 基本操作
 初始化
-```c
-
+```c:line-numbers
+//初始化
+void InitQueue(LinkQueue &Q)
+{
+    Q.front = Q.rear = (LinkNode *)malloc(sizeof(LinkNode));
+    Q.front->next = NULL;
+}
 ```
 入队
-```c
-
+```c:line-numbers
+//入队
+bool EnQueue(LinkQueue &Q, ElemType x)
+{
+    LinkNode *s = (LinkNode *)malloc(sizeof(LinkNode));
+    if (s == NULL)
+        return false;
+    s->data = x;
+    s->next = NULL;
+    Q.rear->next = s;
+    Q.rear = s;
+    return true;
+}
 ```
 出队 
-```c
-
+```c:line-numbers
+//出队
+bool DeQueue(LinkQueue &Q, ElemType &x)
+{
+    if (Q.front == Q.rear)//队空错误
+        return false;
+    //p指针标记弹出结点
+    LinkNode *p = Q.front->next;
+    x = p->data;
+    Q.front->next = p->next;
+    if (Q.rear == p)//p为队尾的特殊情况
+        Q.rear = Q.front;
+    free(p);
+    return true;
+}
 ```
 判空
-```c
-
+```c:line-numbers
+//判空
+bool isEmpty(LinkQueue &Q)
+{
+    if (Q.front == Q.rear)
+        return true;
+    else
+        return false;
+}
 ```
 ##### 特点
 :::tip
