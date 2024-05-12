@@ -255,6 +255,9 @@ bool RightGetTop(ShareStack &S, ElemType &x)
 
 ## 队列
 ### 定义
+- 只允许在一端进行插入在另一端进行删除操作的线性表
+- 队头 队尾 空队
+- 先进先出 FIFO
 ### 基本操作
 ### 存储结构
 #### <font color=#40A8F5>顺序队列</font> <font color=#DC2D1E>(循环队列)</font>
