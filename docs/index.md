@@ -18,7 +18,7 @@ features:
   
   - icon: 👩‍💻
     title: Programming
-    details: 编程相关内容 pushceshi
+    details: 编程相关内容pushceshi
     link: /programming/
     linkText: open
   - icon: 🎮
