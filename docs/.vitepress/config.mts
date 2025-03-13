@@ -18,6 +18,7 @@ export default defineConfig({
       },
       {
         text: 'Game Development', items: [
+          { text: 'unity', link: '/game_development/unity/' },
           { text: 'lua', link: '/game_development/lua/' },
           { text: 'love2d', link: '/game_development/love2d/' },
           { text: 'godot', link: '/game_development/godot/' },
