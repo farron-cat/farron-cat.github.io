@@ -57,6 +57,7 @@ export default defineConfig({
           { text: '-----脚本-----' },
           { text: 'lua', link: '/game_development/lua/' },
           { text: '-----引擎-----' },
+          { text: 'unity', link: '/game_development/unity/' },
           { text: 'love2d', link: '/game_development/love2d/' },
           { text: 'godot', link: '/game_development/godot/' },
           { text: '----图形API----' },
@@ -71,7 +72,7 @@ export default defineConfig({
 
     footer: {
       message: 'collect all interests',
-      copyright: 'Copyright © 2023-2024 @farron cat'
+      copyright: 'Copyright © 2023-2025 @farron cat'
     }
   }
 })
