@@ -18,12 +18,12 @@ features:
   
   - icon: 👩‍💻
     title: Programming
-    details: 编程相关内容
+    details: 编程相关内容 <br />包括C++
     link: /programming/
     linkText: open
   - icon: 🎮
     title: Game Development
-    details: 游戏开发相关内容?<br />包括脚本，引擎，图形API
+    details: 游戏开发相关内容<br />包括脚本，引擎，图形API
     link: /game_development/
     linkText: open
   - icon: 🎈
