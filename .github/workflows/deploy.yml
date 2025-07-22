@@ -37,4 +37,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/.vitepress/dist
           destination_dir: ./  # 可选，如果你想直接发布到 gh-pages 根目录
-          keep_files: false  # 设置为 false 以每次部署时清除旧文件
+          keep_files: false  # 设置为 false 以每次部署时清除旧文件d
