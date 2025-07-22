@@ -23,7 +23,7 @@ features:
     linkText: open
   - icon: 🎮
     title: Game Development
-    details: 游戏开发相关内容<br />包括脚本，引擎，图形API
+    details: 游戏开发相关内容测试测试测试<br />包括脚本，引擎，图形API
     link: /game_development/
     linkText: open
   - icon: 🎈
