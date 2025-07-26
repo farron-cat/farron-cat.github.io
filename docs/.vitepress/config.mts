@@ -103,18 +103,25 @@ export default defineConfig({
         },
 
         {
-          text: 'Graphic Library',
+          text: 'Graphics Library',
           items: [
             { text: 'SDL', link: '/game_development/sdl/' },
           ]
         },
 
         {
-          text: 'Graphic API',
+          text: 'Graphics API',
 
           items: [
             { text: 'OpenGL', link: '/game_development/opengl/' },
             { text: 'DirectX', link: '/game_development/dx/' },
+          ]
+        },
+
+        {
+          text: 'Other Library',
+          items: [
+            { text: 'other library', link: '/game_development/other library/' },
           ]
         }
 

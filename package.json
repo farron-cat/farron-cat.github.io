@@ -15,5 +15,9 @@
   "license": "ISC",
   "devDependencies": {
     "vitepress": "^1.1.0"
+  },
+  "dependencies": {
+    "@vue/runtime-core": "^3.5.18",
+    "vue": "^3.5.18"
   }
 }
