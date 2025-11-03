@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "farron cat's Blog"
-  text: "collect all interests"
+  text: "collect all Interests"
   tagline: ""
 
   actions:

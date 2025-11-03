@@ -1,7 +1,7 @@
 # 其他库
 
-[1. glm 安装](./glm.md)
+[1. GLM 安装配置和使用示例](./glm.md)
 
-[2. nlohmann_json 安装](./nlmajson.md)
+[2. Nlohman_Json 安装配置和使用示例](./nlmajson.md)
 
-[3. spdlog 安装](./spdlog.md)
+[3. Spdlog 安装配置和使用示例](./spdlog.md)

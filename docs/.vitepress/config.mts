@@ -2,13 +2,15 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "farron cat's blog",
+  title: "farron cat's Blog",
 
   description: "a personal blog",
 
+  head:[['link', { rel: 'icon', href: '/farroncat.jpg' }]],
+
   themeConfig: {
 
-    siteTitle: "farron cat's blog",
+    siteTitle: "farron cat's Blog",
 
     logo: "farroncat.jpg",
     // https://vitepress.dev/reference/default-theme-config
@@ -19,8 +21,8 @@ export default defineConfig({
       {
         text: 'Programming languages', items: [
           { text: 'C++', link: '/programming/cpp/' },
-          { text: 'lua', link: '/programming/lua/' },
-          { text: 'data structure', link: '/programming/data_structure/' },
+          { text: 'Lua', link: '/programming/lua/' },
+          { text: 'Data Structure', link: '/programming/data_structure/' },
         ]
       },
 
@@ -29,9 +31,10 @@ export default defineConfig({
 
           {
             text: 'Game Engine', items: [
-              { text: 'unity', link: '/game_development/unity/' },
-              { text: 'love2d', link: '/game_development/love2d/' },
-              { text: 'godot', link: '/game_development/godot/' },
+              {text: 'Game engine Concept', link: '/game_development/engine-concept'},
+              { text: 'Unity', link: '/game_development/unity/' },
+              { text: 'Love2d', link: '/game_development/love2d/' },
+              { text: 'Godot', link: '/game_development/godot/' },
             ]
           },
 
@@ -45,6 +48,12 @@ export default defineConfig({
             text: 'Graphic API', items: [
               { text: 'OpenGL', link: '/game_development/opengl/' },
               { text: 'DirectX', link: '/game_development/dx/' },
+            ]
+          },
+
+          {
+            text: 'Other Library', items:[
+              { text: 'Other Library', link: '/game_development/other library/' },
             ]
           },
 
@@ -67,8 +76,8 @@ export default defineConfig({
           text: 'Programming',
           items: [
             { text: 'C++', link: '/programming/cpp/' },
-            { text: 'lua', link: '/programming/lua/' },
-            { text: 'data structure', link: '/programming/data_structure/' },
+            { text: 'Lua', link: '/programming/lua/' },
+            { text: 'Data Structure', link: '/programming/data_structure/' },
           ]
         }
       ],
@@ -96,9 +105,9 @@ export default defineConfig({
         {
           text: 'Game Engine',
           items: [
-            { text: 'unity', link: '/game_development/unity/' },
-            { text: 'love2d', link: '/game_development/love2d/' },
-            { text: 'godot', link: '/game_development/godot/' },
+            { text: 'Unity', link: '/game_development/unity/' },
+            { text: 'Love2d', link: '/game_development/love2d/' },
+            { text: 'Godot', link: '/game_development/godot/' },
           ]
         },
 
@@ -121,12 +130,12 @@ export default defineConfig({
         {
           text: 'Other Library',
           items: [
-            { text: 'other library', link: '/game_development/other library/' },
+            { text: 'Other Library', link: '/game_development/other library/' },
           ]
         }
 
       ],
-
+      
     },
 
     socialLinks: [
@@ -134,7 +143,7 @@ export default defineConfig({
     ],
 
     footer: {
-      message: 'collect all interests',
+      message: 'collect all Interests',
       copyright: 'Copyright © 2023-2025 @farron cat'
     }
   }
