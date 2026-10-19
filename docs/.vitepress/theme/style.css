@@ -188,3 +188,309 @@
   display: table;
   width: 100%;
 }
+
+/**
+ * Component: Animated background
+ * 极光光斑，纯 CSS 动画
+ * -------------------------------------------------------------------------- */
+
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/*
+ * 注意：这里刻意不加 will-change: transform。
+ * blur 滤镜 + will-change 的组合在某些 Chrome 版本下会把元素
+ * 提升为静态合成层，导致 transform 动画不再重绘。
+ */
+.animated-bg .blob {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+  transform: translate3d(0, 0, 0);
+}
+
+/* 紫 */
+.animated-bg .blob-1 {
+  top: -18vh;
+  left: -10vw;
+  width: 55vw;
+  height: 55vw;
+  max-width: 720px;
+  max-height: 720px;
+  background: radial-gradient(circle at 30% 30%, #bd34fe, transparent 70%);
+  animation: blob-drift-1 22s ease-in-out infinite;
+}
+
+/* 青 */
+.animated-bg .blob-2 {
+  top: 10vh;
+  right: -14vw;
+  width: 50vw;
+  height: 50vw;
+  max-width: 680px;
+  max-height: 680px;
+  background: radial-gradient(circle at 60% 40%, #41d1ff, transparent 70%);
+  animation: blob-drift-2 28s ease-in-out infinite;
+}
+
+/* 品红 */
+.animated-bg .blob-3 {
+  bottom: -22vh;
+  left: 18vw;
+  width: 46vw;
+  height: 46vw;
+  max-width: 620px;
+  max-height: 620px;
+  background: radial-gradient(circle at 50% 50%, #ff5fa2, transparent 70%);
+  animation: blob-drift-3 32s ease-in-out infinite;
+}
+
+/* 暖黄点缀 */
+.animated-bg .blob-4 {
+  bottom: 6vh;
+  right: 6vw;
+  width: 34vw;
+  height: 34vw;
+  max-width: 460px;
+  max-height: 460px;
+  background: radial-gradient(circle at 50% 50%, #ffc45c, transparent 70%);
+  animation: blob-drift-4 18s ease-in-out infinite;
+  opacity: 0.32;
+}
+
+/* 细微噪点，避免大面积渐变出现色带 */
+.animated-bg .bg-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* 多点闭环路径：光斑缓慢游走，不会出现「走到尽头再倒回」的机械感 */
+@keyframes blob-drift-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  25% {
+    transform: translate3d(18vw, 12vh, 0) scale(1.15);
+  }
+
+  50% {
+    transform: translate3d(30vw, 4vh, 0) scale(1.05);
+  }
+
+  75% {
+    transform: translate3d(14vw, 22vh, 0) scale(1.2);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes blob-drift-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+
+  25% {
+    transform: translate3d(-20vw, 16vh, 0) scale(0.95);
+  }
+
+  50% {
+    transform: translate3d(-32vw, 2vh, 0) scale(1.1);
+  }
+
+  75% {
+    transform: translate3d(-12vw, -14vh, 0) scale(0.9);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+}
+
+@keyframes blob-drift-3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.95);
+  }
+
+  25% {
+    transform: translate3d(16vw, -18vh, 0) scale(1.12);
+  }
+
+  50% {
+    transform: translate3d(-8vw, -28vh, 0) scale(1.02);
+  }
+
+  75% {
+    transform: translate3d(-22vw, -10vh, 0) scale(1.15);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.95);
+  }
+}
+
+@keyframes blob-drift-4 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  25% {
+    transform: translate3d(-14vw, -12vh, 0) scale(1.18);
+  }
+
+  50% {
+    transform: translate3d(-26vw, 6vh, 0) scale(1.05);
+  }
+
+  75% {
+    transform: translate3d(-10vw, 16vh, 0) scale(1.22);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* 深色模式：更强发光感 */
+html.dark .animated-bg .blob {
+  opacity: 0.38;
+  filter: blur(90px);
+}
+
+html.dark .animated-bg .blob-4 {
+  opacity: 0.24;
+}
+
+html.dark .animated-bg .bg-grain {
+  opacity: 0.05;
+}
+
+/* 浅色模式：水彩晕染感，更淡 */
+html:not(.dark) .animated-bg .blob {
+  opacity: 0.28;
+}
+
+html:not(.dark) .animated-bg .blob-4 {
+  opacity: 0.2;
+}
+
+/* 移动端：减少光斑模糊半径，避免掉帧 */
+@media (max-width: 768px) {
+  .animated-bg .blob {
+    filter: blur(56px);
+    opacity: 0.3;
+  }
+
+  .animated-bg .blob-3,
+  .animated-bg .blob-4 {
+    display: none;
+  }
+
+  /* 移动端侧边栏为全屏抽屉，提高不透明度保证可读性 */
+  .VPSidebar {
+    background: var(--vp-c-bg) !important;
+    background: color-mix(in srgb, var(--vp-c-bg) 94%, transparent) !important;
+  }
+}
+
+/*
+ * 系统的「减少动态效果」设置
+ *
+ * 注意：VitePress 默认主题自带一条全局规则
+ *   @media (prefers-reduced-motion: reduce) {
+ *     *, :before, :after {
+ *       animation-duration: 1ms !important;
+ *       animation-iteration-count: 1 !important;
+ *     }
+ *   }
+ * 它会连带把背景光斑的动画一起掐掉（只播 1 次、1ms 结束）。
+ * 这里显式覆盖 duration 与 iteration-count 两个属性，
+ * 把光斑放慢到约 1.4 倍，既保留柔和的呼吸感，也不会造成视觉刺激。
+ *
+ * 如需完全静止，改为 `animation: none !important` 即可。
+ */
+@media (prefers-reduced-motion: reduce) {
+  .animated-bg .blob {
+    animation-iteration-count: infinite !important;
+  }
+
+  .animated-bg .blob-1 {
+    animation-duration: 30s !important;
+  }
+
+  .animated-bg .blob-2 {
+    animation-duration: 38s !important;
+  }
+
+  .animated-bg .blob-3 {
+    animation-duration: 44s !important;
+  }
+
+  .animated-bg .blob-4 {
+    animation-duration: 25s !important;
+  }
+}
+
+/**
+ * 让默认主题的各层容器透出背景
+ * -------------------------------------------------------------------------- */
+
+/* 页面根容器 */
+.VPApp {
+  background: transparent !important;
+}
+
+/* 顶部导航：玻璃拟态（先给不支持 color-mix 的浏览器一个不透明回退） */
+.VPNav {
+  background: transparent !important;
+}
+
+.VPNavBar,
+.VPNavBar:not(.home),
+.VPNavBar.has-sidebar .content {
+  background: var(--vp-c-bg) !important;
+  background: color-mix(in srgb, var(--vp-c-bg) 72%, transparent) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* 侧边栏：半透明 + 模糊 */
+.VPSidebar {
+  background: var(--vp-c-bg) !important;
+  background: color-mix(in srgb, var(--vp-c-bg) 78%, transparent) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* 正文区域 */
+.VPContent {
+  background: transparent !important;
+}
+
+/* 局部搜索弹层保持可读性 */
+.VPLocalSearchBox .search-bar,
+.VPLocalSearchBox .search-input {
+  background: var(--vp-c-bg);
+}
+
+/*
+ * 让正文盖在背景之上：
+ * 背景是 position: fixed + z-index: 0，且在 DOM 中先于 VPContent，
+ * 因此 VPContent 只需同层级即可绘制在其上方；
+ * 顶部导航与侧边栏本身已有更高的 z-index，无需改动。
+ */
+.VPContent {
+  position: relative;
+  z-index: 0;
+}
