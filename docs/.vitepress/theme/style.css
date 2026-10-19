@@ -43,7 +43,7 @@
  *   in custom container, badges, etc.
  * -------------------------------------------------------------------------- */
 
- :root {
+:root {
   --vp-c-default-1: var(--vp-c-gray-1);
   --vp-c-default-2: var(--vp-c-gray-2);
   --vp-c-default-3: var(--vp-c-gray-3);
@@ -92,17 +92,13 @@
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    #bd34fe 30%,
-    #41d1ff
-  );
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg,
+      #bd34fe 30%,
+      #41d1ff);
 
-  --vp-home-hero-image-background-image: linear-gradient(
-    -45deg,
-    #bd34fe 50%,
-    #47caff 50%
-  );
+  --vp-home-hero-image-background-image: linear-gradient(-45deg,
+      #bd34fe 50%,
+      #47caff 50%);
   --vp-home-hero-image-filter: blur(44px);
 }
 
@@ -137,3 +133,58 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+/**
+ * Component: About page
+ * -------------------------------------------------------------------------- */
+
+.about-hero {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  margin: 24px 0 32px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background: var(--vp-c-bg-soft);
+}
+
+.about-avatar {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 4px var(--vp-c-bg), 0 0 0 6px var(--vp-c-brand-soft);
+}
+
+.about-intro h2 {
+  margin: 0 0 8px;
+  padding-top: 0;
+  border-top: none;
+  font-size: 1.5rem;
+}
+
+.about-intro p {
+  margin: 4px 0;
+}
+
+.about-motto {
+  color: var(--vp-c-text-2);
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .about-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/**
+ * 正文中的表格撑满宽度
+ * -------------------------------------------------------------------------- */
+
+.vp-doc table {
+  display: table;
+  width: 100%;
+}

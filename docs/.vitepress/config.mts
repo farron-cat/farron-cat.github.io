@@ -2,11 +2,22 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  lang: 'zh-CN',
+
   title: "farron cat's Blog",
 
-  description: "a personal blog",
+  description: "一个记录编程、数据结构与游戏开发笔记的个人博客",
 
-  head:[['link', { rel: 'icon', href: '/farroncat.jpg' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/farroncat.jpg' }],
+    ['meta', { name: 'theme-color', content: '#bd34fe' }]
+  ],
+
+  lastUpdated: true,
+
+  markdown: {
+    lineNumbers: true
+  },
 
   themeConfig: {
 
@@ -16,77 +27,87 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
 
     nav: [
-      { text: 'Home', link: '/' },
+      { text: '首页', link: '/' },
 
       {
-        text: 'Programming languages', items: [
+        text: '编程',
+        items: [
           { text: 'C++', link: '/programming/cpp/' },
           { text: 'Lua', link: '/programming/lua/' },
-          { text: 'Data Structure', link: '/programming/data_structure/' },
+          { text: '数据结构', link: '/programming/data_structure/' },
         ]
       },
 
       {
-        text: 'Game Development', items: [
-
+        text: '游戏开发',
+        items: [
           {
-            text: 'Game Engine', items: [
-              {text: 'Game engine Concept', link: '/game_development/engine-concept'},
-              { text: 'Unity', link: '/game_development/unity/' },
-              { text: 'Love2d', link: '/game_development/love2d/' },
+            text: '引擎与架构',
+            items: [
+              { text: '游戏引擎概念', link: '/game_development/engine-concept/' },
+              { text: 'Platformer 引擎', link: '/game_development/platformer/' },
+            ]
+          },
+          {
+            text: '引擎',
+            items: [
               { text: 'Godot', link: '/game_development/godot/' },
+              { text: 'Unity', link: '/game_development/unity/' },
+              { text: 'Love2D', link: '/game_development/love2d/' },
             ]
           },
-
           {
-            text: 'Graphic Library', items: [
-              { text: 'SDL', link: '/game_development/sdl/' },
-            ]
-          },
-
-          {
-            text: 'Graphic API', items: [
+            text: '图形 API 与库',
+            items: [
               { text: 'OpenGL', link: '/game_development/opengl/' },
               { text: 'DirectX', link: '/game_development/dx/' },
+              { text: 'SDL', link: '/game_development/sdl/' },
+              { text: '其他库', link: '/game_development/other library/' },
             ]
           },
-
-          {
-            text: 'Other Library', items:[
-              { text: 'Other Library', link: '/game_development/other library/' },
-            ]
-          },
-
         ]
       },
 
       {
-        text: 'Interests', items: [
-          { text: 'incomming...', link: ' '},
+        text: '杂记',
+        items: [
+          { text: 'Steam 下载断断续续', link: '/other/steam_download' },
         ]
       },
 
-      { text: 'About Me', link: '/about' }
+      { text: '关于我', link: '/about' }
     ],
 
     sidebar: {
 
       '/programming/': [
         {
-          text: 'Programming',
+          text: '编程',
           items: [
+            { text: '概览', link: '/programming/' },
             { text: 'C++', link: '/programming/cpp/' },
             { text: 'Lua', link: '/programming/lua/' },
-            { text: 'Data Structure', link: '/programming/data_structure/' },
+            { text: '数据结构', link: '/programming/data_structure/' },
+          ]
+        }
+      ],
+
+      '/programming/cpp/': [
+        {
+          text: 'C++',
+          items: [
+            { text: '概览', link: '/programming/cpp/' },
+            { text: '要点总结', link: '/programming/cpp/essence' },
+            { text: 'STL', link: '/programming/cpp/stl' },
           ]
         }
       ],
 
       '/programming/data_structure/': [
         {
-          text: 'data structure',
+          text: '数据结构',
           items: [
-            { text: '数据结构', link: '/programming/data_structure/' },
+            { text: '概览', link: '/programming/data_structure/' },
             { text: '第一章 绪论', link: '/programming/data_structure/chap1' },
             { text: '第二章 线性表', link: '/programming/data_structure/chap2' },
             { text: '第三章 栈和队列', link: '/programming/data_structure/chap3' },
@@ -103,39 +124,127 @@ export default defineConfig({
 
       '/game_development/': [
         {
-          text: 'Game Engine',
+          text: '引擎与架构',
           items: [
-            { text: 'Unity', link: '/game_development/unity/' },
-            { text: 'Love2d', link: '/game_development/love2d/' },
+            { text: '概览', link: '/game_development/' },
+            { text: '游戏引擎概念', link: '/game_development/engine-concept/' },
+            { text: 'Platformer 引擎', link: '/game_development/platformer/' },
+          ]
+        },
+
+        {
+          text: '游戏引擎',
+          items: [
             { text: 'Godot', link: '/game_development/godot/' },
+            { text: 'Unity', link: '/game_development/unity/' },
+            { text: 'Love2D', link: '/game_development/love2d/' },
           ]
         },
 
         {
-          text: 'Graphics Library',
-          items: [
-            { text: 'SDL', link: '/game_development/sdl/' },
-          ]
-        },
-
-        {
-          text: 'Graphics API',
-
+          text: '图形 API 与库',
           items: [
             { text: 'OpenGL', link: '/game_development/opengl/' },
             { text: 'DirectX', link: '/game_development/dx/' },
-          ]
-        },
-
-        {
-          text: 'Other Library',
-          items: [
-            { text: 'Other Library', link: '/game_development/other library/' },
+            { text: 'SDL', link: '/game_development/sdl/' },
+            { text: '其他库', link: '/game_development/other library/' },
           ]
         }
-
       ],
-      
+
+      '/game_development/engine-concept/': [
+        {
+          text: '游戏引擎概念',
+          items: [
+            { text: '概览', link: '/game_development/engine-concept/' },
+            { text: '引擎架构', link: '/game_development/engine-concept/architecture' },
+            { text: '平台游戏设计', link: '/game_development/engine-concept/platformer-design' },
+          ]
+        }
+      ],
+
+      '/game_development/opengl/': [
+        {
+          text: 'OpenGL',
+          items: [
+            { text: '概览', link: '/game_development/opengl/' },
+            { text: 'GLFW 与 GLEW', link: '/game_development/opengl/glfw&glew' },
+            { text: 'VBO / VAO / EBO', link: '/game_development/opengl/vbo&vao&ebo' },
+            { text: '绘制三角形', link: '/game_development/opengl/drawtriangle' },
+            { text: 'GLSL 着色器语言', link: '/game_development/opengl/glsl' },
+          ]
+        }
+      ],
+
+      '/game_development/sdl/': [
+        {
+          text: 'SDL',
+          items: [
+            { text: '概览', link: '/game_development/sdl/' },
+            { text: 'SDL2', link: '/game_development/sdl/sdl2' },
+            { text: 'SDL3', link: '/game_development/sdl/sdl3' },
+          ]
+        }
+      ],
+
+      '/game_development/other library/': [
+        {
+          text: '其他库',
+          items: [
+            { text: '概览', link: '/game_development/other library/' },
+            { text: 'GLM', link: '/game_development/other library/glm' },
+            { text: 'nlohmann json', link: '/game_development/other library/nlmajson' },
+            { text: 'spdlog', link: '/game_development/other library/spdlog' },
+          ]
+        }
+      ],
+
+      '/game_development/godot/': [
+        {
+          text: 'Godot',
+          items: [
+            { text: '概览', link: '/game_development/godot/' },
+            { text: '基本概念', link: '/game_development/godot/fristgame' },
+          ]
+        }
+      ],
+
+      '/game_development/platformer/': [
+        {
+          text: 'Platformer 引擎',
+          items: [
+            { text: '概览', link: '/game_development/platformer/' },
+            { text: '引擎核心层', link: '/game_development/platformer/core' },
+          ]
+        }
+      ],
+    },
+
+    outline: {
+      level: [2, 3],
+      label: '本页目录'
+    },
+
+    search: {
+      provider: 'local'
+    },
+
+    editLink: {
+      pattern: 'https://github.com/farron-cat/farron-cat.github.io/edit/main/docs/:path',
+      text: '在 GitHub 上编辑此页'
+    },
+
+    docFooter: {
+      prev: '上一篇',
+      next: '下一篇'
+    },
+
+    lastUpdated: {
+      text: '最后更新于',
+      formatOptions: {
+        dateStyle: 'short',
+        timeStyle: 'short'
+      }
     },
 
     socialLinks: [
@@ -144,7 +253,13 @@ export default defineConfig({
 
     footer: {
       message: 'collect all Interests',
-      copyright: 'Copyright © 2023-2025 @farron cat'
+      copyright: 'Copyright © 2023-2026 @farron cat'
+    },
+
+    notFound: {
+      title: '页面走丢了',
+      quote: '这个页面还不存在，也许笔记还没写到这里。',
+      linkText: '回到首页'
     }
   }
 })

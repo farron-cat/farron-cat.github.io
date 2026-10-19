@@ -5,33 +5,38 @@ layout: home
 hero:
   name: "farron cat's Blog"
   text: "collect all Interests"
-  tagline: ""
+  tagline: 编程 · 数据结构 · 游戏开发 —— 把学到的都想明白，再写下来
 
   actions:
     - theme: brand
-      text: Programming
+      text: 开始阅读
       link: /programming/
     - theme: alt
-      text: Game Development
+      text: 游戏开发
       link: /game_development/
+    - theme: alt
+      text: 关于我
+      link: /about
 
 features:
-  - icon: 👩‍💻
-    title: Programming languages
-    details: 编程相关内容<br />包括lua,C++,C#,数据结构
+  - icon: 💻
+    title: 编程语言
+    details: C++ 语言要点与 STL、Lua 基础<br />关注内存、对象模型与工程实践
     link: /programming/
-    linkText: open
+    linkText: 前往
+  - icon: 🧱
+    title: 数据结构
+    details: 绪论、线性表、栈和队列、串、树、图<br />查找、排序，以及广义表与并查集
+    link: /programming/data_structure/
+    linkText: 前往
   - icon: 🎮
-    title: Game Development
-    details: 游戏开发相关内容<br />包括引擎,库,图形API
+    title: 游戏开发
+    details: 引擎架构、OpenGL、SDL、DirectX 12<br />Godot / Unity / Love2D 与常用第三方库
     link: /game_development/
-    linkText: open
+    linkText: 前往
   - icon: 🎈
-    title: Interests
-    details: 兴趣收集
-    
+    title: 兴趣收集
+    details: 除技术之外的杂项笔记<br />持续扩充中
+    link: /other/steam_download
+    linkText: 看看
 ---
-
-
-
-

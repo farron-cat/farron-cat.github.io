@@ -1,9 +1,14 @@
-# OpenGl 笔记
+# OpenGL 笔记
 
-[1.关于GLFW和GLEW辅助库](./glfw&glew.md)
+从环境搭建到画出第一个三角形，再到着色器语言，按学习顺序整理。
 
-[2.OpenGL对象：VBO 、VAO、EBO](./vbo&vao&ebo.md)
+| # | 主题 | 说明 | 入口 |
+| --- | --- | --- | --- |
+| 1 | GLFW 与 GLEW | 窗口/上下文创建与函数加载库的配置 | [阅读](./glfw&glew) |
+| 2 | OpenGL 对象 | VBO、VAO、EBO 的职责与关系 | [阅读](./vbo&vao&ebo) |
+| 3 | 绘制三角形 | 完整的渲染流程：着色器、顶点数据、渲染循环 | [阅读](./drawtriangle) |
+| 4 | GLSL | OpenGL 着色器语言基础 | [阅读](./glsl) |
 
-[3.绘制三角形](./drawtriangle.md)
-
-[4.GLSL OpenGL着色器语言](./glsl.md)
+::: tip 学习顺序
+先搞清楚 **对象是什么、为什么要绑定**，再动手画三角形，最后回头理解着色器——比直接抄代码有效得多。
+:::
