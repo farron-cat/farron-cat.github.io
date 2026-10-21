@@ -6,7 +6,7 @@ export default defineConfig({
 
   title: "farron cat's Blog",
 
-  description: "一个记录编程、数据结构与游戏开发笔记的个人博客",
+  description: "一个记录编程、数据结构、游戏开发与嵌入式笔记的个人博客",
 
   head: [
     ['link', { rel: 'icon', href: '/farroncat.jpg' }],
@@ -65,6 +65,13 @@ export default defineConfig({
               { text: '其他库', link: '/game_development/other library/' },
             ]
           },
+        ]
+      },
+
+      {
+        text: '嵌入式',
+        items: [
+          { text: 'GD32F407 学习笔记', link: '/embedded/GD32F407_myLibrary_note/README' },
         ]
       },
 
@@ -215,6 +222,99 @@ export default defineConfig({
           items: [
             { text: '概览', link: '/game_development/platformer/' },
             { text: '引擎核心层', link: '/game_development/platformer/core' },
+          ]
+        }
+      ],
+
+      '/embedded/': [
+        {
+          text: '嵌入式开发',
+          items: [
+            { text: '概览', link: '/embedded/' },
+            { text: 'GD32F407 笔记总览', link: '/embedded/GD32F407_myLibrary_note/README' },
+          ]
+        },
+        {
+          text: '基础模块',
+          collapsed: false,
+          items: [
+            { text: '01 工程搭建', link: '/embedded/GD32F407_myLibrary_note/01-工程搭建' },
+            { text: '02 GPIO-LED灯组', link: '/embedded/GD32F407_myLibrary_note/02-GPIO-LED灯组' },
+            { text: '03 独立按键', link: '/embedded/GD32F407_myLibrary_note/03-独立按键' },
+            { text: '04 串口USART', link: '/embedded/GD32F407_myLibrary_note/04-串口USART' },
+            { text: '05 充电流水灯状态机', link: '/embedded/GD32F407_myLibrary_note/05-充电流水灯状态机' },
+          ]
+        },
+        {
+          text: '中断与定时',
+          collapsed: false,
+          items: [
+            { text: '06 外部中断EXTI', link: '/embedded/GD32F407_myLibrary_note/06-外部中断EXTI' },
+            { text: '07 定时器与PWM', link: '/embedded/GD32F407_myLibrary_note/07-定时器与PWM' },
+            { text: '08 DMA', link: '/embedded/GD32F407_myLibrary_note/08-DMA' },
+          ]
+        },
+        {
+          text: '显示与输入',
+          collapsed: true,
+          items: [
+            { text: '09 数码管', link: '/embedded/GD32F407_myLibrary_note/09-数码管' },
+            { text: '10 矩阵键盘', link: '/embedded/GD32F407_myLibrary_note/10-矩阵键盘' },
+            { text: '18 OLED显示屏', link: '/embedded/GD32F407_myLibrary_note/18-OLED显示屏' },
+            { text: '26 188数码管', link: '/embedded/GD32F407_myLibrary_note/26-188数码管' },
+            { text: '28 AD按键ADKEY', link: '/embedded/GD32F407_myLibrary_note/28-AD按键ADKEY' },
+            { text: '29 旋转编码器EC12', link: '/embedded/GD32F407_myLibrary_note/29-旋转编码器EC12' },
+            { text: '30 WS2812彩灯', link: '/embedded/GD32F407_myLibrary_note/30-WS2812彩灯' },
+            { text: '31 触摸按键SC12B', link: '/embedded/GD32F407_myLibrary_note/31-触摸按键SC12B' },
+            { text: '32 点阵屏MAX7219', link: '/embedded/GD32F407_myLibrary_note/32-点阵屏MAX7219' },
+          ]
+        },
+        {
+          text: '时钟与系统',
+          collapsed: true,
+          items: [
+            { text: '11 RTC实时时钟', link: '/embedded/GD32F407_myLibrary_note/11-RTC实时时钟' },
+            { text: '12 看门狗', link: '/embedded/GD32F407_myLibrary_note/12-看门狗' },
+            { text: '17 PCF8563外部RTC', link: '/embedded/GD32F407_myLibrary_note/17-PCF8563外部RTC' },
+            { text: '25 PMU电源管理', link: '/embedded/GD32F407_myLibrary_note/25-PMU电源管理' },
+          ]
+        },
+        {
+          text: '通信协议',
+          collapsed: true,
+          items: [
+            { text: '15 IIC总线', link: '/embedded/GD32F407_myLibrary_note/15-IIC总线' },
+            { text: '16 SPI总线', link: '/embedded/GD32F407_myLibrary_note/16-SPI总线' },
+            { text: '24 SPI-Flash存储', link: '/embedded/GD32F407_myLibrary_note/24-SPI-Flash存储' },
+          ]
+        },
+        {
+          text: '传感器与模拟',
+          collapsed: true,
+          items: [
+            { text: '19 ADC', link: '/embedded/GD32F407_myLibrary_note/19-ADC' },
+            { text: '27 NTC热敏电阻测温', link: '/embedded/GD32F407_myLibrary_note/27-NTC热敏电阻测温' },
+          ]
+        },
+        {
+          text: '操作系统',
+          collapsed: false,
+          items: [
+            { text: '33 裸机多任务taskmanager', link: '/embedded/GD32F407_myLibrary_note/33-裸机多任务taskmanager' },
+            { text: '34 FreeRTOS移植', link: '/embedded/GD32F407_myLibrary_note/34-FreeRTOS移植' },
+            { text: '35 FreeRTOS同步与中断机制', link: '/embedded/GD32F407_myLibrary_note/35-FreeRTOS同步与中断机制' },
+          ]
+        },
+        {
+          text: '专题总结',
+          collapsed: true,
+          items: [
+            { text: '13 计时外设与频率计算', link: '/embedded/GD32F407_myLibrary_note/13-专题-计时外设与频率计算' },
+            { text: '14 时钟树与总线', link: '/embedded/GD32F407_myLibrary_note/14-专题-时钟树与总线' },
+            { text: '20 工程文档与硬件信息', link: '/embedded/GD32F407_myLibrary_note/20-工程文档与硬件信息' },
+            { text: '21 定时器扩展功能汇总与比较', link: '/embedded/GD32F407_myLibrary_note/21-专题-定时器扩展功能汇总与比较' },
+            { text: '22 通信协议汇总与比较', link: '/embedded/GD32F407_myLibrary_note/22-专题-通信协议汇总与比较' },
+            { text: '23 如何查手册与数据手册', link: '/embedded/GD32F407_myLibrary_note/23-专题-如何查手册与数据手册' },
           ]
         }
       ],

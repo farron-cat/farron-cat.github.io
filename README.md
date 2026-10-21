@@ -4,7 +4,7 @@
 
 # farron cat's Blog
 
-**collect all Interests** — 一个记录编程、游戏开发与图形学笔记的个人博客。
+**collect all Interests** — 一个记录编程、游戏开发、嵌入式与图形学笔记的个人博客。
 
 [![VitePress](https://img.shields.io/badge/VitePress-1.x-646cff?logo=vite&logoColor=white)](https://vitepress.dev/)
 [![Vue](https://img.shields.io/badge/Vue-3.x-42b883?logo=vue.js&logoColor=white)](https://vuejs.org/)
@@ -21,13 +21,14 @@
 
 本站是基于 [VitePress](https://vitepress.dev/) + [Vue 3](https://vuejs.org/) 构建的静态站点，内容以 Markdown 书写，构建产物通过 `gh-pages` 分支发布到 GitHub Pages。
 
-笔记主要围绕三条线展开：
+笔记主要围绕四条线展开：
 
 | 方向 | 内容 |
 | --- | --- |
 | 💻 **编程语言** | C++ 核心要点、STL、Lua |
 | 🧱 **数据结构** | 绪论 → 线性表 → 栈队列 → 串 → 树 → 图 → 查找 → 排序，附广义表、并查集 |
 | 🎮 **游戏开发** | 引擎概念、OpenGL、SDL2/3、GLM / nlohmann json / spdlog、DirectX、Godot、Unity、Love2D |
+| 🔌 **嵌入式开发** | GD32F407 从入门到 FreeRTOS，35 篇模块笔记 + 5 篇专题总结 |
 
 ## 🗂 目录结构
 
@@ -61,6 +62,8 @@ farron-cat.github.io
 │  │  ├─ godot/               #   ├─ Godot 基础概念
 │  │  ├─ unity/               #   ├─ Unity（占位）
 │  │  └─ love2d/              #   └─ Love2D（占位）
+│  ├─ embedded/               # 嵌入式开发相关
+│  │  └─ GD32F407_myLibrary_note/  # GD32F407 学习笔记（35 篇模块 + 5 篇专题）
 │  └─ other/                  # 杂项（如 Steam 下载中断的处理）
 ├─ package.json
 └─ pnpm-lock.yaml
@@ -127,6 +130,7 @@ git push -f <repo> main:gh-pages      :: 强制推送到 gh-pages 分支
 | 模块 | 状态 | 备注 |
 | --- | --- | --- |
 | 数据结构 | ✅ 完整 | 第 1–8 章 + 广义表 + 并查集 |
+| **嵌入式 GD32F407** | ✅ 完整 | 35 篇模块笔记 + 5 篇专题总结，涵盖从入门到 FreeRTOS |
 | OpenGL | 🚧 进行中 | 环境配置、VBO/VAO/EBO、绘制三角形已完成；GLSL 待补 |
 | SDL | ✅ 基本完成 | SDL2 / SDL3 安装配置 |
 | 其他库 | ✅ 基本完成 | GLM、nlohmann json、spdlog |
@@ -152,6 +156,6 @@ git push -f <repo> main:gh-pages      :: 强制推送到 gh-pages 分支
 
 <div align="center">
 
-Copyright © 2023-2025 [@farron cat](https://github.com/farron-cat)
+Copyright © 2023-2026 [@farron cat](https://github.com/farron-cat)
 
 </div>
